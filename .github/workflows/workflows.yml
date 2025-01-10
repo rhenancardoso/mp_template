@@ -1,0 +1,36 @@
+name: Piazote-template
+
+on:
+  [push]
+
+jobs:
+  linting:
+    strategy:
+      fail-fast: true
+    runs-on: ubuntu-20.04
+    steps:
+    - uses: actions/checkout@v4
+    - name: Lint project using pre-commit
+      run: source ci/ci.sh && ci_commit_formatting_run
+
+  build_piazote:
+    strategy:
+      fail-fast: true
+    runs-on: ubuntu-20.04
+    steps:
+    - uses: actions/checkout@v4
+    - name: Read the ESP-IDF version
+      run: source ci/ci.sh && echo "IDF_VER=$IDF_VER"
+
+    - name: Install ESP-IDF packages
+      if: steps.cache_esp_idf.outputs.cache-hit != 'true'
+      run: source ci/ci.sh && ci_esp32_idf_setup
+
+    - name: Initialise micropython submodule
+      run: git submodule update --init --recursive
+
+    - name: Build ESP32 submodule
+      run: source ci/ci.sh && ci_esp32_build_common
+
+    - name: Build Piazote boards
+      run: source ci/ci.sh && ci_piazote_builds
