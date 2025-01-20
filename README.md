@@ -9,13 +9,6 @@
 make flash_upy
 ```
 
-## Copying Python files
-In root directory
-1. To copy files `main.py`, `boot.py` and `config.json` run
-```
-make copy_files
-```
-
 ## Accesing the REPL
 1. With `mpremote` installed, run
 ```
@@ -28,8 +21,25 @@ make repl
 make erase
 ```
 
+
 # Contributing
-## pre-commit
+## Pre-requisites
+### ESP-IDF
+First [install esp-idf](https://docs.espressif.com/projects/esp-idf/en/v5.3.2/esp32/get-started/index.html), currently using version v5.3.2.
+
+### Pre-commmit
+This repo also uses `pre-commit` for linting. To install it, run:
+```
+pip install pre-commit
+```
+
+## Initialise Micopython submodule
+1. Run
+```
+git submodule update --init --recursive
+```
+
+## Linting
 1. When copying this repository run
 ```
 pre-commit install
@@ -37,10 +47,4 @@ pre-commit install
 2. For linting run
 ```
 pre-commit run --all-fiels
-```
-
-## Initialise Micopython submodule
-1. Run
-```
-git submodule update --init --recursive
 ```

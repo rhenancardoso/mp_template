@@ -14,7 +14,7 @@ function ci_commit_formatting_run {
 # ports/esp32
 
 # GitHub tag of ESP-IDF to use for CI (note: must be a tag or a branch)
-IDF_VER=v5.2.2
+IDF_VER=v5.3.2
 MICROPYTHON_PATH=src/micropython
 export IDF_CCACHE_ENABLE=1
 
